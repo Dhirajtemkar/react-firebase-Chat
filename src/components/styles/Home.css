@@ -1,0 +1,68 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&family=PT+Sans&display=swap");
+
+* {
+  margin: 0px;
+}
+
+/* 
+Color pallet
+color1-grey: #dddddd;
+color1-light: #ffc8c8;
+color1-pastel: #ff9999;
+color1-Dark: #444f5a;
+color1-Darker: #3e4149;
+
+*/
+
+nav {
+  width: 100%;
+  height: 4rem;
+  background: #3e4149;
+  display: flex;
+  align-items: center;
+}
+.home__logo {
+  font-size: 18px;
+  font-family: "Montserrat", "PT Sans", sans-serif;
+  margin: 1rem;
+  color: #dddddd;
+}
+.home__menu {
+  border-radius: 10px;
+  padding-bottom: 0.5rem;
+  padding-top: 0.5rem;
+  position: absolute;
+  right: 1rem;
+  /* border: 1px solid black; */
+}
+.navMenuBtn {
+  display: flex;
+  flex-direction: column;
+  margin-top: -4px;
+  /* border: 1px solid white; */
+}
+.navMenuDots {
+  width: 4px;
+  height: 4px;
+  border-radius: 100px;
+  background-color: #dddddd;
+  margin-top: 3px;
+}
+
+.menu__profileImg {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 5px;
+  background: #eeeeee;
+  /* border: 1px solid black; */
+  margin-left: 1rem;
+}
+.menu__logout {
+  color: #d72323;
+}
+
+.home__main {
+  width: 100%;
+  height: 90vh;
+  background: #ffc8c8;
+}
