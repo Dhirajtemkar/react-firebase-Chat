@@ -7,8 +7,11 @@ import {
   Button
 } from "@material-ui/core";
 import Fire from "../Fire";
+import { provider } from "../Fire";
 import SignUp from "../components/SignUp";
 import "./Login.css";
+
+import GoogleLogo from "../resources/googleLogo.svg";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -38,6 +41,27 @@ function Login() {
     event.preventDefault();
     setSignUp(1);
     // console.log(this.signUp);
+  };
+
+  const loginWithGoogle = event => {
+    Fire.auth()
+      .signInWithPopup(provider)
+      .then(function(result) {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        // var token = result.credential.accessToken;
+        // // The signed-in user info.
+        // var user = result.user;
+      })
+      .catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // The email of the user's account used.
+        var errorEmail = error.email;
+        // The firebase.auth.AuthCredential type that was used.
+        var credential = error.credential;
+        console.log(errorCode, errorMessage, errorEmail, credential);
+      });
   };
 
   return (
@@ -73,7 +97,14 @@ function Login() {
         )}
 
         <FormHelperText className="login__or">~Or You Can~</FormHelperText>
-        <Button variant="contained">Sign-In with Google</Button>
+        <Button
+          onClick={loginWithGoogle}
+          className="login__google"
+          variant="contained"
+        >
+          <img src={GoogleLogo} alt="google-logo" />
+          Login with Google
+        </Button>
       </form>
     </div>
   );

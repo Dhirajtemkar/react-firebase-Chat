@@ -11,7 +11,13 @@ var firebaseConfig = {
   measurementId: "G-T8ZF4SG9BQ"
 };
 // Initialize Firebase
+// export const auth = firebase.auth();
 
 export default (!firebase.apps.length
   ? firebase.initializeApp(firebaseConfig)
   : firebase.app());
+
+export const provider = new firebase.auth.GoogleAuthProvider();
+provider.setCustomParameters({
+  promt: "select_account"
+});

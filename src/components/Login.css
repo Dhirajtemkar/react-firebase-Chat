@@ -1,7 +1,7 @@
 .form__login {
   display: flex;
   flex-direction: column;
-  width: 70%;
+  width: 50%;
   margin: auto;
   padding: 2rem 2rem;
   border-radius: 3px;
@@ -31,6 +31,14 @@
 .login__btnLis button {
   width: 50%;
   margin-left: 2%;
+}
+.login__google img {
+  width: 1.7rem;
+  position: absolute;
+  left: 5%;
+}
+.login__google {
+  font-weight: 600;
 }
 
 .main__home {
