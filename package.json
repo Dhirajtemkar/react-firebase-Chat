@@ -1,7 +1,7 @@
 {
-  "name": "login-signup-firebase",
+  "name": "react-chat-app-basic",
   "version": "1.0.0",
-  "description": "",
+  "description": "this was me ettempting to make a react chat application with firebase",
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {
