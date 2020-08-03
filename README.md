@@ -1,4 +1,4 @@
-# react-firebase-app
+# react-firebase-Chat
 Created with CodeSandbox
 
 ## React Chat App
