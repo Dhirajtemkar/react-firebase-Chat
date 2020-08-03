@@ -1,16 +1,29 @@
 import React, { useState, useEffect } from "react";
-import { Button } from "@material-ui/core";
+// import { Button } from "@material-ui/core";
 import "./styles/ChatArea.css";
 import Message from "../components/Message";
+import Fire from "../Fire";
+import firebase from "firebase";
+import SendIcon from "@material-ui/icons/Send";
+import IconButton from "@material-ui/core/IconButton";
+import FlipMove from "react-flip-move";
 
 function ChatArea() {
   const [input, setInput] = useState("");
-  const [messages, setMessage] = useState([
-    { username: "Dhiraj", text: "Hey Guy's" },
-    { username: "Brinda", text: "Hi Dhiraj" },
-    { username: "Vinod", text: "What's up my boy!" }
-  ]);
+  const [messages, setMessage] = useState([]);
   const [username, setUsername] = useState("");
+  const db = Fire.firestore();
+
+  useEffect(() => {
+    // run only once to initialize
+    db.collection("messages")
+      .orderBy("timestamp", "desc")
+      .onSnapshot(snapshot => {
+        setMessage(
+          snapshot.docs.map(doc => ({ id: doc.id, message: doc.data() }))
+        );
+      });
+  }, []);
 
   useEffect(() => {
     setUsername(prompt("Please enter your Name"));
@@ -22,7 +35,11 @@ function ChatArea() {
 
   const sendMessage = event => {
     event.preventDefault();
-    setMessage([...messages, { username: username, text: input }]);
+    db.collection("messages").add({
+      message: input,
+      username: username,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp()
+    });
     setInput("");
   };
   // console.log(messages)
@@ -34,10 +51,11 @@ function ChatArea() {
       </div>
       <div className="messages__area">
         <p>Welome {username}</p>
-
-        {messages.map(message => (
-          <Message username={username} message={message} />
-        ))}
+        <FlipMove>
+          {messages.map(({ id, message }) => (
+            <Message key={id} username={username} message={message} />
+          ))}
+        </FlipMove>
       </div>
       <div className="chatArea__inputArea">
         <form>
@@ -47,15 +65,15 @@ function ChatArea() {
             onChange={handleMessage}
             value={input}
           />
-          <Button
+          <IconButton
             type="submit"
             onClick={sendMessage}
             className="sendMessage"
             variant="contained"
-            color="secondary"
+            color="primary"
           >
-            Go
-          </Button>
+            <SendIcon />
+          </IconButton>
         </form>
       </div>
     </div>
